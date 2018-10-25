@@ -2,15 +2,7 @@
 import * as React from 'react'
 import * as Types from '../../constants/types/wallets'
 import {capitalize} from 'lodash-es'
-import {
-  Avatar,
-  Box2,
-  Button,
-  ClickableBox,
-  Icon,
-  ConnectedUsernames,
-  WaitingButton,
-} from '../../common-adapters'
+import {Avatar, Box2, ClickableBox, Icon, ConnectedUsernames, WaitingButton} from '../../common-adapters'
 import Text, {type TextType} from '../../common-adapters/text'
 import {collapseStyles, globalColors, globalMargins, styleSheetCreate} from '../../styles'
 import {formatTimeForMessages, formatTimeForStellarTooltip} from '../../util/timestamp'
@@ -315,9 +307,7 @@ export type Props = {|
   memo: string,
   onCancelPayment: ?() => void,
   onCancelPaymentWaitingKey: string,
-  // onChat and onShowProfile are used only when counterpartyType ===
-  // 'keybaseUser'.
-  onChat: string => void,
+  // onShowProfile is used only when counterpartyType === 'keybaseUser'.
   onSelectTransaction?: () => void,
   onShowProfile: string => void,
   readState: ReadState,
@@ -393,14 +383,6 @@ export const Transaction = (props: Props) => {
                   </Text>
                 )}
                 <Box2 direction="horizontal" gap="tiny" fullWidth={true}>
-                  {props.counterpartyType === 'keybaseUser' && (
-                    <Button
-                      type="Secondary"
-                      label="Chat"
-                      small={true}
-                      onClick={() => props.onChat(props.counterparty)}
-                    />
-                  )}
                   {props.onCancelPayment && (
                     <WaitingButton
                       type="Danger"
