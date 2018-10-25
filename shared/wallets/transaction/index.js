@@ -376,29 +376,24 @@ export const Transaction = (props: Props) => {
             />
             {showMemo && <MarkdownMemo style={styles.marginVerticalXTiny} memo={props.memo} />}
             <Box2 direction="horizontal" fullWidth={true}>
-              <Box2 direction="vertical" gap="tiny">
-                {props.onCancelPayment && (
+              {props.onCancelPayment && (
+                <Box2 direction="vertical" gap="tiny">
                   <Text type="BodySmall">
                     {props.counterparty} can claim this when they set up their wallet.
                   </Text>
-                )}
-                <Box2 direction="horizontal" gap="tiny" fullWidth={true}>
-                  {props.onCancelPayment && (
-                    <WaitingButton
-                      type="Danger"
-                      label="Cancel"
-                      small={true}
-                      style={styles.cancelButton}
-                      onClick={evt => {
-                        evt.stopPropagation()
-                        props.onCancelPayment && props.onCancelPayment()
-                      }}
-                      waitingKey={props.onCancelPaymentWaitingKey}
-                    />
-                  )}
+                  <WaitingButton
+                    type="Danger"
+                    label="Cancel"
+                    small={true}
+                    style={styles.cancelButton}
+                    onClick={evt => {
+                      evt.stopPropagation()
+                      props.onCancelPayment && props.onCancelPayment()
+                    }}
+                    waitingKey={props.onCancelPaymentWaitingKey}
+                  />
                 </Box2>
-              </Box2>
-
+              )}
               <Box2 direction="horizontal" style={{flex: 1}} />
               <AmountXLM
                 selectableText={props.selectableText}
