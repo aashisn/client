@@ -88,23 +88,23 @@ const Counterparty = (props: CounterpartyProps) => {
   if (props.counterpartyType === 'keybaseUser') {
     return (
       <Kb.Box2 direction="vertical" fullWidth={true}>
-      <Kb.NameWithIcon
-        colorFollowing={true}
-        horizontal={true}
-        onClick={() => props.onShowProfile(props.counterparty)}
-        username={props.counterparty}
-        metaOne={props.counterpartyMeta}
-        underline={true}
-        metaTwo={props.accountID && <SmallAccountID accountID={props.accountID} />}
+        <Kb.NameWithIcon
+          colorFollowing={true}
+          horizontal={true}
+          onClick={() => props.onShowProfile(props.counterparty)}
+          username={props.counterparty}
+          metaOne={props.counterpartyMeta}
+          underline={true}
+          metaTwo={props.accountID && <SmallAccountID accountID={props.accountID} />}
         />
-                    <Kb.Button
-                      type="Secondary"
-                      label="Chat"
-      small={true}
-      style={styles.chatButton}
-                      onClick={() => props.onChat(props.counterparty)}
-                    />
-        </Kb.Box2>
+        <Kb.Button
+          type="Secondary"
+          label="Chat"
+          small={true}
+          style={styles.chatButton}
+          onClick={() => props.onChat(props.counterparty)}
+        />
+      </Kb.Box2>
     )
   }
 
@@ -138,6 +138,7 @@ const YourAccount = props => {
       counterpartyType={props.counterpartyType}
       counterparty={props.yourAccountName}
       accountID={yourAccountID}
+      onChat={() => {}}
       onShowProfile={() => {}}
       counterpartyMeta=""
     />
@@ -205,6 +206,7 @@ const propsToParties = (props: NotLoadingProps) => {
       counterparty={props.counterparty}
       counterpartyMeta={props.counterpartyMeta}
       counterpartyType={props.counterpartyType}
+      onChat={props.onChat}
       onShowProfile={props.onShowProfile}
     />
   )
@@ -360,7 +362,7 @@ export default LoadTransactionDetails
 
 const styles = Styles.styleSheetCreate({
   chatButton: {
-    alignSelf: 'start',
+    alignSelf: 'flex-start',
     marginTop: Styles.globalMargins.tiny,
   },
   container: {
