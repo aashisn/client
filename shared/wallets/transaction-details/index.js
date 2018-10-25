@@ -80,12 +80,14 @@ type CounterpartyProps = {|
   counterparty: string,
   counterpartyMeta: ?string,
   counterpartyType: Types.CounterpartyType,
+  onChat: string => void,
   onShowProfile: string => void,
 |}
 
 const Counterparty = (props: CounterpartyProps) => {
   if (props.counterpartyType === 'keybaseUser') {
     return (
+      <Kb.Box2 direction="vertical" fullWidth={true}>
       <Kb.NameWithIcon
         colorFollowing={true}
         horizontal={true}
@@ -94,7 +96,15 @@ const Counterparty = (props: CounterpartyProps) => {
         metaOne={props.counterpartyMeta}
         underline={true}
         metaTwo={props.accountID && <SmallAccountID accountID={props.accountID} />}
-      />
+        />
+                    <Kb.Button
+                      type="Secondary"
+                      label="Chat"
+      small={true}
+      style={styles.chatButton}
+                      onClick={() => props.onChat(props.counterparty)}
+                    />
+        </Kb.Box2>
     )
   }
 
@@ -105,7 +115,7 @@ const Counterparty = (props: CounterpartyProps) => {
         counterpartyType={props.counterpartyType}
         onShowProfile={props.onShowProfile}
       />
-      <Kb.Box2 direction="vertical" fullWidth={true} style={styles.counterPartyText}>
+      <Kb.Box2 direction="vertical" fullWidth={true} style={styles.counterpartyText}>
         <CounterpartyText
           counterparty={props.counterparty}
           counterpartyType={props.counterpartyType}
@@ -349,10 +359,14 @@ class LoadTransactionDetails extends React.Component<Props> {
 export default LoadTransactionDetails
 
 const styles = Styles.styleSheetCreate({
+  chatButton: {
+    alignSelf: 'start',
+    marginTop: Styles.globalMargins.tiny,
+  },
   container: {
     padding: Styles.globalMargins.small,
   },
-  counterPartyText: {
+  counterpartyText: {
     justifyContent: 'center',
     marginLeft: Styles.globalMargins.tiny,
   },
